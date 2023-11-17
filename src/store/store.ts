@@ -1,10 +1,12 @@
 import { combineReducers,configureStore } from "@reduxjs/toolkit";
 import dishReducer from "./reducers/DishSlice"
 import popupReducer from "./reducers/PopupSlice"
+import searchReducer from "./reducers/SearchSlice"
 
 const rootReducer = combineReducers({
    dishReducer,
-   popupReducer
+   popupReducer,
+   searchReducer
 })
 
 export const setupStore = ()=>{

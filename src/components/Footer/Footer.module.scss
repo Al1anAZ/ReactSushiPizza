@@ -1,0 +1,32 @@
+@import "../../values.scss";
+
+.FooterBody{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid $LightGrey;
+    padding-top: 20px;
+}
+.LeftFooter{
+    >b{
+        margin-left: 10px;
+        >span{
+            color: $MainColor;
+        }
+    }
+}
+.RightFooter{
+    margin-top: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: last baseline;
+    >b{
+        >span{
+            color: $MainColor;
+        }
+    }
+}
+.Contacts{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

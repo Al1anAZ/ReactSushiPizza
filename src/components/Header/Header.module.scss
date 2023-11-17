@@ -4,9 +4,11 @@
     margin-bottom: 40px;
     display: flex;
     justify-content:  space-between;
+    align-items: center;
     border-bottom: 1px solid $LightGrey;
 }
 .Left{
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,6 +26,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 50px;
     width: 150px;
     >ul{
         display: flex;

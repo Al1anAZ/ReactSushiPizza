@@ -5,43 +5,61 @@ import { popupSlice } from "../../store/reducers/PopupSlice";
 import { fetchDishes } from "../../store/reducers/AsyncAction";
 import { LoadingDish } from "../../components/Dish";
 import classes from "./Home.module.scss"
+import { searchSlice } from "../../store/reducers/SearchSlice";
+import MyButton from "../../components/UI/MyButton";
+
+
 export const Home: React.FC = ()=>{
     //Массив блоков загрузки
     const loadingElements = [<LoadingDish key={0}/>,<LoadingDish key={1}/>,<LoadingDish key={2}/>,<LoadingDish key={3}/>,<LoadingDish key={4}/>,<LoadingDish key={5}/>,<LoadingDish key={6}/>,<LoadingDish key={7}/>]
      //Все блюда, статус загрузки, текст ошибки, состояние попапа(t/f)
     const {dishes,isLoading,error} = useAppSelector(state => state.dishReducer)
     const popupvisible = useAppSelector(state => state.popupReducer.popupVisible);
+    const search = useAppSelector(state => state.searchReducer.inputVal)
     //Диструктуризация екшенов
+    const {setSearch} = searchSlice.actions;
     const {setVisiblePopup} = popupSlice.actions;
     const dispatch = useAppDispatch();
     //Стейты хранящие в себе какую фильтр. и сорт. выбрал юзер
     const [Sort,setSort] = useState<String>('');
     const [activeCategories, setActiveCategories] = useState<String>('all');
-    //Фильтрация по категориям и сортировка 
+    //Фильтрация по категориям и сортировка  и поиск
   const activeDishes = useMemo(() => {
+    if(search && !Sort)
+      return [...dishes].filter(item => item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+
     if (Sort === 'найдешевшому') {
+      if(search)
+         return [...dishes].filter(item => item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())).sort((a, b) => a.price - b.price);
       if (activeCategories === 'all') {
         return [...dishes].sort((a, b) => a.price - b.price);
       }
       return [...dishes].filter(dish => dish.category === activeCategories).sort((a, b) => a.price - b.price);
     }
+
     if (Sort === 'найдорожчому') {
+      if(search)
+         return [...dishes].filter(item => item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())).sort((a, b) => b.price - a.price);
       if (activeCategories === 'all') {
         return [...dishes].sort((a, b) => b.price - a.price);
       }
       return [...dishes].filter(dish => dish.category === activeCategories).sort((a, b) => b.price - a.price);
     }
+
     if (Sort === 'абеткою') {
+      if(search)
+        return [...dishes].filter(item => item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())).sort((a, b) => a.name.localeCompare(b.name));
       if (activeCategories === 'all') {
         return [...dishes].sort((a, b) => a.name.localeCompare(b.name));
       }
       return [...dishes].filter(dish => dish.category === activeCategories).sort((a, b) => a.name.localeCompare(b.name));
     }
+
     if (activeCategories === 'all') {
       return [...dishes];
     }
     return [...dishes].filter(dish => dish.category === activeCategories);
-  }, [activeCategories, Sort, dishes]);
+  }, [activeCategories, Sort, dishes,search]);
   //Получаем блюда при первом рендеренге
   useEffect(()=>{
      dispatch(fetchDishes())
@@ -49,7 +67,7 @@ export const Home: React.FC = ()=>{
     return (
         <>
          {error ? 
-           <div style={{textAlign: "center"}}>
+           <div style={{textAlign: "center", height: "60vh"}}>
              <h1>{error} <br /> Спробуйте перезаванажити сторінку &#128549;</h1>
            </div>
            :
@@ -58,12 +76,16 @@ export const Home: React.FC = ()=>{
            :
            <>
             <div className={classes.CategoriesAndSordBar}>
+        {search ? 
+        <MyButton handler={()=> dispatch(setSearch(''))} inlinestyle={ButtonBack}><b>Назад</b></MyButton> 
+        : 
         <ul className={classes.Categories}>
           <li className={activeCategories === "all" ? classes.active : ''} onClick={()=> setActiveCategories("all")}><b>Всі</b></li>
           <li className={activeCategories === "pizza" ? classes.active : ''} onClick={()=> setActiveCategories("pizza")}><b>Піци</b></li>
           <li className={activeCategories === "sushi" ? classes.active : ''} onClick={()=> setActiveCategories("sushi")}><b>Суши</b></li>
           <li className={activeCategories === "rolls" ? classes.active : ''} onClick={()=> setActiveCategories("rolls")}><b>Ролли</b></li>
         </ul>
+      }
         <div className={classes.Sort}>
              <div>
                 <img src="./imgs/UI/popup.svg" alt="popupimg" className={popupvisible ? classes.rotate : ''} onClick={(e: React.MouseEvent<HTMLImageElement, MouseEvent>)=> {e.stopPropagation();dispatch(setVisiblePopup(!popupvisible))}}/>
@@ -79,15 +101,24 @@ export const Home: React.FC = ()=>{
              </div>}
         </div>
         </div>
-        <h2>{activeCategories === "all" ? `Всі страви` : activeCategories === "pizza" ? `Піци` : activeCategories === "sushi" ? `Суши` : activeCategories === "rolls"? `Ролли` : null}</h2>
+        {search ?  <h2><span className={classes.textblue}>Результати пошуку: </span>"{search}"</h2>
+         : 
+         <h2>{activeCategories === "all" ? `Всі страви` : activeCategories === "pizza" ? `Піци` : activeCategories === "sushi" ? `Суши` : activeCategories === "rolls"? `Ролли` :  null}</h2>
+         }
         <div className={classes.Dishes}>
-           {activeDishes.map(dish=> <Dish 
+          {activeDishes.length ? activeDishes.map(dish=> <Dish 
            key={dish.id}
            dish={dish}
-           />)}
+           />) : <h2>Нічого <span className={classes.textblue}>не знайдено</span> &#128528;</h2>}
         </div>
            </>
          }
         </>
     )
+}
+const ButtonBack : React.CSSProperties ={
+  borderRadius: 20,
+  width: 200,
+  padding: 10,
+  fontSize: 26
 }

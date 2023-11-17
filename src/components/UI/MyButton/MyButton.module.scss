@@ -1,0 +1,25 @@
+@import "../../../values.scss";
+.Button{
+    cursor: pointer;
+    border: none;
+    color: white;
+    color: white;
+    background-color: $MainColor;
+    transition: all 0.2s;
+    &:hover{
+        background-color:rgba(0, 82, 204, 0.5);
+    }
+    &:active{
+        background-color: $MainColorDark;
+    }
+    &:disabled{
+        cursor: default;
+        background-color: rgba(0, 82, 204, 0.5);
+        &:hover{
+            background-color:rgba(0, 82, 204, 0.5);
+        }
+        &:active{
+            background-color:rgba(0, 82, 204, 0.5);
+        }
+    }
+}

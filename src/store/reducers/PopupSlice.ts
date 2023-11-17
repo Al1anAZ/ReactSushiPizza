@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-interface PopupState{ 
+type PopupState = { 
     popupVisible: boolean;
 }
 const initialState : PopupState = {

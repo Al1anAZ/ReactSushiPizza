@@ -2,11 +2,12 @@ import { useState } from "react";
 import { IDish } from "../../types/models/IDish";
 import ContentLoader from "react-content-loader"
 import classes from "./Dish.module.scss"
+import MyButton from "../UI/MyButton";
 
-interface DishProp{
+type DishProp = {
    dish: IDish;
 }
-interface DishToCard{
+type DishToCard ={
    dish: IDish;
    pizzaProps?: {
     dough?: string;
@@ -89,9 +90,16 @@ const Dish: React.FC<DishProp> = ({dish})=>{
 
             <div className={classes.Bottom}>
                 <span><b>{dish.category === "pizza" ? 'від' : null} {dish.price} ₴</b></span>
-                <button><b>+ Додати </b></button>
+                <MyButton handler={()=>{}} inlinestyle={AddToCartButton}><b>+ Додати </b></MyButton>
             </div>
          </div>
     );
+}
+const AddToCartButton : React.CSSProperties = {
+    padding: "0 15px 0 15px",
+    width: 132,
+    height: 40,
+    fontSize: 16,
+    borderRadius: 30
 }
 export default Dish

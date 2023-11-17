@@ -14,14 +14,16 @@
         padding: 15px;
         border-radius: 30px;
         margin-right: 20px;
-        transition: all 0.4s;
+        transition: color 0.4s , background 0.4s;
     }
     >li.active{
         color: white;
         background-color: $Black;
     }
+
 }
 .Dishes{
+    min-height: 50vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -81,4 +83,7 @@
         background-color: rgba($color: rgba(0, 82, 204, 1), $alpha: 0.1);
      }
    }
+}
+.textblue{
+    color: $MainColor;
 }

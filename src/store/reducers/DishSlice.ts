@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IDish } from "../../types/models/IDish";
 import { fetchDishes } from "./AsyncAction";
 
-interface DishState{
+type DishState = {
     dishes: IDish[];
     isLoading: boolean;
     error: string;

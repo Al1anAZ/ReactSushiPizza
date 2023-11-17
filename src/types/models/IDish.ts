@@ -1,4 +1,6 @@
-interface IPizzaProps{
+
+
+type IPizzaProps = {
     thin: boolean;
     trad: boolean;
     small: boolean;
@@ -6,7 +8,7 @@ interface IPizzaProps{
     large: boolean;
 }
 
-export interface IDish{
+export type IDish = {
         id: number;
         name: string;
         price: number;

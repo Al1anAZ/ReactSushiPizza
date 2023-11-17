@@ -50,30 +50,7 @@
     >span{
         font-size: 21px;
     }
-    >button{
-        cursor: pointer;
-        display: flex;
-        padding: {
-            left: 15px;
-            right: 15px;
-        };
-        justify-content: center;
-        align-items: center;
-        width: 132px;
-        height: 40px;
-        border-radius: 30px;
-        border: none;
-        color:  white;
-        background-color: $MainColor;
-        font-size: 16px;
-        transition: all 0.2s;
-        &:hover{
-            background-color:rgba(0, 82, 204, 0.5);
-        }
-        &:active{
-            background-color: $MainColorDark;
-        }
-    }
+   
 }
 .Customize{
     margin-top: 22px;

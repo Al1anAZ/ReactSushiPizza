@@ -1,4 +1,5 @@
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { Home } from "./pages/Home";
 import "./App.scss"
 import { Route, Routes } from "react-router-dom";
@@ -15,6 +16,7 @@ const dispatch = useAppDispatch()
           <Routes>
             <Route path="/" element={<Home/>}/>
           </Routes>
+          <Footer/>
       </div>
     </div>
   );
