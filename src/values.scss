@@ -1,0 +1,13 @@
+$MainColor: rgb(0, 82, 204) ;
+$MainColorDark: rgb(1, 39, 95) ;
+$LightGrey: rgba(249, 249, 249, 1);
+$Grey: rgb(196, 196, 196);
+$Black: rgba(40, 40, 40, 1);
+
+$bp-phone: 576px; // Телефоны и планшеты в портретной ориентации
+$bp-tablet: 768px; // Планшеты в ландшафтной ориентации и десктопы
+$bp-desktop: 992px; // Настольные мониторы и более
+
+$mq-phone: "only screen and (max-width: #{$bp-phone - 1})";
+$mq-tablet: "only screen and (min-width: #{$bp-phone}) and (max-width: #{$bp-tablet - 1})";
+$mq-desktop: "only screen and (min-width: #{$bp-tablet}) and (max-width: #{$bp-desktop - 1})";

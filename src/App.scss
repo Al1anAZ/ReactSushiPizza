@@ -1,0 +1,42 @@
+@import "./values.scss";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Proxima Nova", sans-serif;
+}
+h1{
+   font-size: 42px;
+}
+h2{
+    font-size: 26px;
+}
+h3{
+    font-size: 20px;
+}
+.App{
+    display: flex;
+    justify-content: center;
+    padding: {
+        top: 43px;
+        bottom: 43px;
+    };
+    background-color: $MainColor;
+    min-height: 100vh;
+}
+.Body{
+    margin: auto; 
+    padding: {
+         top: 50px;
+         left: 60px;
+         right: 60px;
+         bottom: 30px;
+    };
+    background-color: white;
+    border-radius: 10px;
+    width: 1340px;
+    >h2{
+         margin-bottom: 35px;
+    }
+}
