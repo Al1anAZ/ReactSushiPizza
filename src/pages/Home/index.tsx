@@ -7,22 +7,34 @@ import { LoadingDish } from "../../components/Dish";
 import classes from "./Home.module.scss"
 import { searchSlice } from "../../store/reducers/SearchSlice";
 import MyButton from "../../components/UI/MyButton";
+import Pagination from "../../components/Pagination";
 
 
 export const Home: React.FC = ()=>{
     //Массив блоков загрузки
     const loadingElements = [<LoadingDish key={0}/>,<LoadingDish key={1}/>,<LoadingDish key={2}/>,<LoadingDish key={3}/>,<LoadingDish key={4}/>,<LoadingDish key={5}/>,<LoadingDish key={6}/>,<LoadingDish key={7}/>]
-     //Все блюда, статус загрузки, текст ошибки, состояние попапа(t/f)
+    
+    //Все блюда, статус загрузки, текст ошибки, состояние попапа(t/f)
     const {dishes,isLoading,error} = useAppSelector(state => state.dishReducer)
     const popupvisible = useAppSelector(state => state.popupReducer.popupVisible);
     const search = useAppSelector(state => state.searchReducer.inputVal)
+    
     //Диструктуризация екшенов
     const {setSearch} = searchSlice.actions;
     const {setVisiblePopup} = popupSlice.actions;
     const dispatch = useAppDispatch();
+    
+    //Стейты  и переменный для пагинации 
+    const [currentPage,setCurrentPage] = useState<number>(1);
+    const [dishesPerPage] = useState<number>(8)
+    const lastDishIndex = currentPage * dishesPerPage;
+    const firstDishIndex = lastDishIndex - dishesPerPage;
+    const paginate = (pagenumber:number) => setCurrentPage(pagenumber)
+    
     //Стейты хранящие в себе какую фильтр. и сорт. выбрал юзер
     const [Sort,setSort] = useState<String>('');
     const [activeCategories, setActiveCategories] = useState<String>('all');
+    
     //Фильтрация по категориям и сортировка  и поиск
   const activeDishes = useMemo(() => {
     if(search && !Sort)
@@ -60,10 +72,15 @@ export const Home: React.FC = ()=>{
     }
     return [...dishes].filter(dish => dish.category === activeCategories);
   }, [activeCategories, Sort, dishes,search]);
+
+  // Отображения текущ кол блюд на стр.
+  const currentDish = activeDishes.slice(firstDishIndex, lastDishIndex)
+
   //Получаем блюда при первом рендеренге
   useEffect(()=>{
      dispatch(fetchDishes())
   },[])
+
     return (
         <>
          {error ? 
@@ -84,6 +101,7 @@ export const Home: React.FC = ()=>{
           <li className={activeCategories === "pizza" ? classes.active : ''} onClick={()=> setActiveCategories("pizza")}><b>Піци</b></li>
           <li className={activeCategories === "sushi" ? classes.active : ''} onClick={()=> setActiveCategories("sushi")}><b>Суши</b></li>
           <li className={activeCategories === "rolls" ? classes.active : ''} onClick={()=> setActiveCategories("rolls")}><b>Ролли</b></li>
+          <li className={activeCategories === "rollsSet" ? classes.active : ''} onClick={()=> setActiveCategories("rollsSet")}><b>Сети</b></li>
         </ul>
       }
         <div className={classes.Sort}>
@@ -103,14 +121,20 @@ export const Home: React.FC = ()=>{
         </div>
         {search ?  <h2><span className={classes.textblue}>Результати пошуку: </span>"{search}"</h2>
          : 
-         <h2>{activeCategories === "all" ? `Всі страви` : activeCategories === "pizza" ? `Піци` : activeCategories === "sushi" ? `Суши` : activeCategories === "rolls"? `Ролли` :  null}</h2>
+         <h2>{activeCategories === "all" ? `Всі страви` : activeCategories === "pizza" ? `Піци` : activeCategories === "sushi" ? `Суши` : activeCategories === "rolls"? `Ролли` :  activeCategories === "rollsSet"?  `Сети` :  null}</h2>
          }
         <div className={classes.Dishes}>
-          {activeDishes.length ? activeDishes.map(dish=> <Dish 
+          {currentDish.length ? currentDish.map(dish=> <Dish 
            key={dish.id}
            dish={dish}
            />) : <h2>Нічого <span className={classes.textblue}>не знайдено</span> &#128528;</h2>}
         </div>
+        <Pagination
+        paginate={paginate}
+        dishesPerPage={dishesPerPage}
+        totalDishes={activeDishes}
+        currPage = {currentPage}
+        />
            </>
          }
         </>

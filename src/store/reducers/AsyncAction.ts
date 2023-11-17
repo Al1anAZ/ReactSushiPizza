@@ -6,7 +6,7 @@ export const fetchDishes = createAsyncThunk(
   'dish/fetchAll',
   async(_,thunkAPI)=>{
     try{
-      const response = await axios.get<IDish[]>(" https://6554d80863cafc694fe71543.mockapi.io/Dish")
+      const response = await axios.get<IDish[]>("https://6554d80863cafc694fe71543.mockapi.io/Dish")
       return response.data
     }
     catch(e){

@@ -1,5 +1,3 @@
-
-
 type IPizzaProps = {
     thin: boolean;
     trad: boolean;

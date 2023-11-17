@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
-type SeacrhState = {
+type SearchState = {
     inputVal: string;
 } 
-const initialState : SeacrhState = {
+const initialState : SearchState = {
     inputVal: ''
 }
 
