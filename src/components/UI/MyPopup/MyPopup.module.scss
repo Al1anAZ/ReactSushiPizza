@@ -1,0 +1,57 @@
+@import "../../../values.scss";
+.Sort{
+    position: relative;
+    >div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        >img{
+            cursor: pointer;
+            margin-right: 5px;
+            transition: all 0.2s;
+        }
+        >img.rotate{
+            transform: rotate(180deg);
+        }
+        >span{
+            user-select: none;
+            cursor: pointer;
+            margin-left: 5px;
+            color: $MainColor;
+            text-decoration: underline dotted;
+        }
+    }
+}
+.Sort_popup{
+    position: absolute;
+    z-index: 3;
+    background-color: white;
+    margin-top: 10px;
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.09);
+    border-radius: 10px;
+    right: 0;
+    padding: {
+        top: 13px;
+        bottom: 13px;
+    };
+   >ul{
+     list-style: none;
+     >li{
+        padding: {
+            left: 10px;
+            right: 10px;
+        };
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        height: 38px;
+        &:hover{
+            background-color: rgba($color: rgba(0, 82, 204, 1), $alpha: 0.1);
+        }
+     }
+     >li.active{
+        color: $MainColor;
+        background-color: rgba($color: rgba(0, 82, 204, 1), $alpha: 0.1);
+     }
+   }
+}

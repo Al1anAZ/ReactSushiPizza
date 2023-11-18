@@ -3,18 +3,16 @@ import Footer from "./components/Footer";
 import { Home } from "./pages/Home";
 import "./App.scss"
 import { Route, Routes } from "react-router-dom";
-import { useAppDispatch } from "./store/hooks/redux";
-import { popupSlice } from "./store/reducers/PopupSlice";
+import Search from "./pages/Search";
 
 function App() {
-const {setVisiblePopup} = popupSlice.actions;
-const dispatch = useAppDispatch()
   return (
     <div className="App">
-      <div className="Body" onClick={()=> dispatch(setVisiblePopup(false))}>
+      <div className="Body">
         <Header/>
           <Routes>
             <Route path="/" element={<Home/>}/>
+            <Route path="/search/:codeddishes" element={<Search/>}/>
           </Routes>
           <Footer/>
       </div>

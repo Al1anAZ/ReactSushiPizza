@@ -54,3 +54,49 @@
         }
     }
 }
+.MyInputBox{
+    height: 40px;
+    display: flex;
+}
+.MyInput{
+    border-radius: 10px 0 0 10px;
+    border: 1px solid $Grey;
+    padding-left: 10px;
+    height: 40px;
+    width: 400px;
+    &:focus{
+        border: 2px solid $MainColor;
+        outline: none;
+    }
+}
+.ButtonClear{
+   position: absolute;
+   top: 50%;
+   right: 0;
+   transform: translate(-20%, -50%);
+   background-color: transparent;
+   cursor: pointer;
+   width: 30px;
+   height: 30px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 10px;
+   border: none;
+   &:hover{
+     background-color: rgba($color: #e4e0e0, $alpha: 1.0);
+   }
+   &:active{
+     background-color: $Grey;
+   }
+   &:disabled{
+    cursor: default;
+    opacity: 0.1;
+    &:hover{
+        background-color: transparent;
+      }
+    &:active{
+        background-color: transparent;
+      }
+   }
+}
