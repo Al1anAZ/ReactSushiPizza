@@ -1,8 +1,10 @@
 import { combineReducers,configureStore } from "@reduxjs/toolkit";
 import dishReducer from "./reducers/DishSlice"
+import cartReducer from "./reducers/CartSlice"
 
 const rootReducer = combineReducers({
    dishReducer,
+   cartReducer
 })
 
 export const setupStore = ()=>{

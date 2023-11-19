@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import classes from "./Search.module.scss"
+import classes from "../Home/Home.module.scss"
 import MyPopup from "../../components/UI/MyPopup";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../store/hooks/redux";
@@ -36,7 +36,7 @@ export default function Search() {
   return (
     <>
     <div className={classes.CategoriesAndSordBar}>
-    <h2>Результати пошуку: <span className={classes.blueTxt}>"{searchquerry}"</span></h2>
+    <h2>Результати пошуку: <span className={classes.textblue}>"{searchquerry}"</span></h2>
      <MyPopup sort={sort}
      handle={setSort}/>
     </div>

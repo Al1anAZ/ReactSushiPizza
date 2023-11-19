@@ -129,3 +129,14 @@
     width: 131.88px;
     height: 32px;
 }
+.incartDishCount{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 13px;
+    background-color: $MainColor;
+    color: white;
+    width: 22px;
+    height: 22px;
+}

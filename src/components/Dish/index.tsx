@@ -3,18 +3,13 @@ import { IDish } from "../../types/models/IDish";
 import ContentLoader from "react-content-loader"
 import classes from "./Dish.module.scss"
 import MyButton from "../UI/MyButton";
+import { ICartDish } from "../../types/models/ICartDish";
+import { useAppDispatch, useAppSelector } from "../../store/hooks/redux";
+import { cartSlice } from "../../store/reducers/CartSlice";
 
 type DishProp = {
    dish: IDish;
 }
-type DishToCard ={
-   dish: IDish;
-   pizzaProps?: {
-    dough?: string;
-    size?:  number;
-   }
-}
-
 export const LoadingDish: React.FC = ()=>{
     return(
       <ContentLoader 
@@ -36,23 +31,41 @@ export const LoadingDish: React.FC = ()=>{
 }
 
 const Dish: React.FC<DishProp> = ({dish})=>{
+  const dispatch  = useAppDispatch()
+  const {addToCart} = cartSlice.actions;
+  const  cart = useAppSelector(state => state.cartReducer.dishes)
+  const incart = cart.filter(item => item.dish.id === dish.id)
+  const count = incart.reduce((prev,curr)=>prev + curr.dish.count,0)
   //Для кастомизации пицц, хранит в себе саму пиццу и параметры к ней, в зависимости что доступно для кастомизации(true/false с бд)
-  const [pizzaProp, setPizzaProp] = useState<DishToCard>({
-    dish: dish, 
-    pizzaProps: {dough: dish.pizzaprops?.thin ? 'thin' : dish.pizzaprops?.trad ? 'trad' : '', 
-    size: dish.pizzaprops?.small ? 26 : dish.pizzaprops?.medium ? 30 : dish.pizzaprops?.large ? 40 : 0}})
+  const [addToCartProp, setaddToCarProp] = useState<ICartDish>({
+    dish:{ 
+      id: dish.id,
+      name: dish.name, 
+      price: dish.price,
+      imgSrc: dish.imgSrc, 
+      pizzaProps: {
+        dough: dish.pizzaprops?.thin ? 'thin' : dish.pizzaprops?.trad ? 'trad' : '',
+        size:  dish.pizzaprops?.small ? 26 : dish.pizzaprops?.medium ? 30 : dish.pizzaprops?.large ? 40 : 0
+      },
+      count: 1 
+    }})
 
 //Обработчик кастомизатора для пиццы
  const handleChangePizzaProps = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name.includes("breadType")) {
-      setPizzaProp({
-        ...pizzaProp,
-        pizzaProps: { dough: e.target.value, size: pizzaProp.pizzaProps?.size }
+      setaddToCarProp({
+       dish:{
+        ...addToCartProp.dish,
+         pizzaProps: { dough: e.target.value, size: addToCartProp.dish.pizzaProps?.size
+       }
+        }
       });
     } else if (e.target.name.includes("size")) {
-      setPizzaProp({
-        ...pizzaProp,
-        pizzaProps: { dough: pizzaProp.pizzaProps?.dough, size: Number(e.target.value) }
+      setaddToCarProp({
+        dish:{
+          ...addToCartProp.dish,
+           pizzaProps: { dough: addToCartProp.dish.pizzaProps?.dough, size: Number(e.target.value)}
+         }
       });
     }
   };
@@ -66,17 +79,17 @@ const Dish: React.FC<DishProp> = ({dish})=>{
             {dish.category === "pizza" ? 
                       <form className={classes.Customize}>
                       <div>
-                      <input type="radio" id={`thin${dish.id}`} name={`breadType${dish.id}`} value={`thin`} disabled={!dish.pizzaprops?.thin} checked={pizzaProp.pizzaProps?.dough === 'thin'} onChange={handleChangePizzaProps}/>
+                      <input type="radio" id={`thin${dish.id}`} name={`breadType${dish.id}`} value={`thin`} disabled={!dish.pizzaprops?.thin} checked={addToCartProp.dish.pizzaProps?.dough === 'thin'} onChange={handleChangePizzaProps}/>
                         <label htmlFor={`thin${dish.id}`} className={classes.radioLabel}><b>Тонке</b></label>
-                        <input type="radio" id={`trad${dish.id}`}  name={`breadType${dish.id}`} value={`trad`} disabled={!dish.pizzaprops?.trad} checked={ pizzaProp.pizzaProps?.dough === 'trad'} onChange={handleChangePizzaProps}/>
+                        <input type="radio" id={`trad${dish.id}`}  name={`breadType${dish.id}`} value={`trad`} disabled={!dish.pizzaprops?.trad} checked={ addToCartProp.dish.pizzaProps?.dough === 'trad'} onChange={handleChangePizzaProps}/>
                         <label htmlFor={`trad${dish.id}`} className={classes.radioLabel}><b>Традиційне</b></label>
                       </div>
                       <div>
-                      <input type="radio" name={`size${dish.id}`} value="26"  id={`26${dish.id}`} disabled={!dish.pizzaprops?.small} checked={pizzaProp.pizzaProps?.size === 26} onChange={handleChangePizzaProps}/>
+                      <input type="radio" name={`size${dish.id}`} value="26"  id={`26${dish.id}`} disabled={!dish.pizzaprops?.small} checked={addToCartProp.dish.pizzaProps?.size === 26} onChange={handleChangePizzaProps}/>
                         <label htmlFor={`26${dish.id}`} className={classes.radioLabel}><b>26 см.</b></label>
-                        <input type="radio" name={`size${dish.id}`} value="30"  id={`30${dish.id}`} disabled={!dish.pizzaprops?.medium} checked={pizzaProp.pizzaProps?.size === 30} onChange={handleChangePizzaProps}/>
+                        <input type="radio" name={`size${dish.id}`} value="30"  id={`30${dish.id}`} disabled={!dish.pizzaprops?.medium} checked={addToCartProp.dish.pizzaProps?.size === 30} onChange={handleChangePizzaProps}/>
                         <label htmlFor={`30${dish.id}`} className={classes.radioLabel}><b>30 см.</b></label>
-                        <input type="radio" name={`size${dish.id}`} value="40"  id={`40${dish.id}`} disabled={!dish.pizzaprops?.large} checked={pizzaProp.pizzaProps?.size === 40} onChange={handleChangePizzaProps}/>
+                        <input type="radio" name={`size${dish.id}`} value="40"  id={`40${dish.id}`} disabled={!dish.pizzaprops?.large} checked={addToCartProp.dish.pizzaProps?.size === 40} onChange={handleChangePizzaProps}/>
                         <label htmlFor={`40${dish.id}`} className={classes.radioLabel}><b>40 см.</b></label>
                       </div>
                      </form>
@@ -90,7 +103,12 @@ const Dish: React.FC<DishProp> = ({dish})=>{
 
             <div className={classes.Bottom}>
                 <span><b>{dish.category === "pizza" ? 'від' : null} {dish.price} ₴</b></span>
-                <MyButton handler={()=>{}} inlinestyle={AddToCartButton}><b>+ Додати </b></MyButton>
+                <MyButton handler={()=>{
+                  const temp : ICartDish = { dish: { 
+                    ...addToCartProp.dish, 
+                    price: addToCartProp.dish.price +  Number(addToCartProp.dish.pizzaProps?.size) + (addToCartProp.dish.pizzaProps?.dough === 'thin' ? 0 : 35)} }
+                  dispatch(addToCart(temp))
+                  }} inlinestyle={ incart.length ?  AddToCartButtonSameInCart : AddToCartButton}><b>+ Додати {incart.length ? <span className={classes.incartDishCount}>{count}</span> :null}</b></MyButton>
             </div>
          </div>
     );
@@ -101,5 +119,15 @@ const AddToCartButton : React.CSSProperties = {
     height: 40,
     fontSize: 16,
     borderRadius: 30
+}
+const AddToCartButtonSameInCart : React.CSSProperties = {
+  border: "2px solid rgba(0, 82, 204, 0.767)",
+  backgroundColor: "white",
+  color: "rgba(0, 82, 204, 0.767)",
+  padding: "0 15px 0 15px",
+  width: 133,
+  height: 40,
+  fontSize: 16,
+  borderRadius: 30
 }
 export default Dish

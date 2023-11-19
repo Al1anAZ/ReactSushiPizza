@@ -12,7 +12,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
+    padding: 5px;
+    transition: background 0.3s;
+    &:hover{
+        background-color: $MainColorLight;
+        b{
+            color: white;
+            text-shadow: 1px 1px black;
+        }
+    }
     b{
+        transition: all 0.3s;
         color: $MainColor;
     }
     >span{
@@ -38,11 +49,17 @@
             };
         }
         >:last-child{
+            border-radius: 5px;
+            padding: 5px;
             margin: {
-                left: 10px;
+                left: 5px;
                 right: 10px;
             };
             cursor: pointer;
+            transition: background 0.2s;
+            &:hover{
+                background-color: $MainColorLight;
+            }
         }
         >li{
             display: flex;

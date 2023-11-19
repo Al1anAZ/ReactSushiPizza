@@ -2,9 +2,12 @@ import classes from './Header.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
 import MyButton from '../UI/MyButton';
+import { useAppSelector } from '../../store/hooks/redux';
 
 const Header: React.FC = () => {
+  const {totalprice,dishes} = useAppSelector(state => state.cartReducer)
   const navigate = useNavigate();
+  const count = dishes.reduce((prev,curr)=>prev + curr.dish.count,0)
   const [input, setInput] = useState<string>('')
   function handleSearch(){
     const serializedSearchQuerry = encodeURIComponent(JSON.stringify(input));
@@ -32,9 +35,9 @@ const Header: React.FC = () => {
     </div>
       <div className={classes.Right}>
          <ul>
-            <li><b>1000 ₴</b></li>
+            <li><b>{totalprice} ₴</b></li>
             <li><div></div></li>
-            <li><img src="/imgs/UI/cart.svg" alt="CartImg" /><b style={{marginLeft: 6, marginTop: 2}}>2</b></li>
+            <li onClick={()=> navigate('/cart')}><img src="/imgs/UI/cart.svg" alt="CartImg" /><b style={{marginLeft: 6, marginTop: 2}}>{count || ''}</b></li>
          </ul>
       </div>
     </header>
