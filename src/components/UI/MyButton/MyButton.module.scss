@@ -19,7 +19,7 @@
             background-color:$MainColorLight;
         }
         &:active{
-            background-color:$MainColorLight;
+            background-color:$MainColorLight !important;
         }
     }
 }

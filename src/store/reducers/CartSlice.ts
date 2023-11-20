@@ -36,11 +36,12 @@ export const cartSlice = createSlice({
                       state.dishes.push(action.payload)
                 }
                 else
-                 state.dishes.map(item => { if(item.dish.id === dish.dish.id) item.dish.count++})
+                 state.dishes.map(item => { if(item.dish.id === dish.dish.id) item.dish.count++; return item})
             }
             else
               state.dishes.push(action.payload)
             state.totalprice = state.dishes.reduce((prev,curr)=> prev + curr.dish.price*curr.dish.count,0);
+            localStorage.setItem('cartDishes',JSON.stringify(state.dishes))
         },
         changeAmmount (state, action : PayloadAction<AmmountChange>){
             switch(action.payload.action){
@@ -49,36 +50,45 @@ export const cartSlice = createSlice({
                         state.dishes.map(item =>{
                             if(item.dish.id === action.payload.dish.dish.id && item.dish.pizzaProps?.dough === action.payload.dish.dish.pizzaProps?.dough && item.dish.pizzaProps?.size === action.payload.dish.dish.pizzaProps?.size)
                              return item.dish.count++
+                          return item
                         })
                     else
-                        state.dishes.map(item => {if(item.dish.id === action.payload.dish.dish.id) item.dish.count++})
-                      
+                        state.dishes.map(item => {if(item.dish.id === action.payload.dish.dish.id) item.dish.count++; return item})
                     break;
                 case '-':
                     if(action.payload.dish.dish.pizzaProps?.dough)
                         state.dishes.map(item =>{
                             if(item.dish.id === action.payload.dish.dish.id && item.dish.pizzaProps?.dough === action.payload.dish.dish.pizzaProps?.dough && item.dish.pizzaProps?.size === action.payload.dish.dish.pizzaProps?.size)
                              return item.dish.count--
+                        return item
                         })
                     else
-                        state.dishes.map(item => {if(item.dish.id === action.payload.dish.dish.id) item.dish.count--})
-                      
+                        state.dishes.map(item => {if(item.dish.id === action.payload.dish.dish.id) item.dish.count--; return item})
                     break;
                 default:
                     break;
             }
             state.totalprice = state.dishes.reduce((prev,curr)=> prev + curr.dish.price*curr.dish.count,0);
+            localStorage.setItem('cartDishes',JSON.stringify(state.dishes))
         },
         deletefromCart (state, action: PayloadAction<ICartDish>){
             if(action.payload.dish.pizzaProps?.dough)
-                state.dishes = state.dishes.filter(item =>  {if(!(item.dish.id === action.payload.dish.id && item.dish.pizzaProps?.dough === action.payload.dish.pizzaProps?.dough && item.dish.pizzaProps?.size === action.payload.dish.pizzaProps?.size)) return item});
+            state.dishes = state.dishes.filter(item => !(item.dish.id === action.payload.dish.id && 
+                item.dish.pizzaProps?.dough === action.payload.dish.pizzaProps?.dough && 
+                item.dish.pizzaProps?.size === action.payload.dish.pizzaProps?.size));
             else
               state.dishes = state.dishes.filter(item => item.dish.id !== action.payload.dish.id);
             state.totalprice = state.dishes.reduce((prev,curr)=> prev + curr.dish.price*curr.dish.count,0);
+            localStorage.setItem('cartDishes',JSON.stringify(state.dishes))
         },
         clearCart (state){
             state.dishes = [];
             state.totalprice = 0;
+            localStorage.setItem('cartDishes',JSON.stringify(state.dishes))
+        },
+        updateCart (state, action : PayloadAction<ICartDish[]>){
+            state.dishes = action.payload;
+            state.totalprice = state.dishes.reduce((prev,curr)=> prev + curr.dish.price*curr.dish.count,0);
         } 
     }
 })

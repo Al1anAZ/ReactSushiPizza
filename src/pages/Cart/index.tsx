@@ -57,7 +57,7 @@ export const Cart: React.FC = ()=>{
             </div>
             <div className={classes.CartButtons}>
                  <MyButton handler={()=>navigator("/")} inlinestyle={ButtonStyle}><b>Повернутися</b></MyButton>
-                 <MyButton handler={()=>{}} inlinestyle={ButtonStyle}> <b>Замовити</b></MyButton>
+                 <MyButton handler={()=>navigator("/cart/order")} inlinestyle={ButtonStyle}> <b>Замовити</b></MyButton>
             </div>
             </>
             :

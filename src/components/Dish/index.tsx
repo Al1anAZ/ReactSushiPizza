@@ -100,7 +100,6 @@ const Dish: React.FC<DishProp> = ({dish})=>{
             </div>
             
           }
-
             <div className={classes.Bottom}>
                 <span><b>{dish.category === "pizza" ? 'від' : null} {dish.price} ₴</b></span>
                 <MyButton handler={()=>{

@@ -1,7 +1,6 @@
-import { useMemo, useState,useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/hooks/redux";
+import { useMemo, useState } from "react";
+import { useAppSelector } from "../../store/hooks/redux";
 import Dish from "../../components/Dish";
-import { fetchDishes } from "../../store/reducers/AsyncAction";
 import { LoadingDish } from "../../components/Dish";
 import classes from "./Home.module.scss"
 import Pagination from "../../components/Pagination";
@@ -15,9 +14,6 @@ export const Home: React.FC = ()=>{
     //Все блюда, статус загрузки, текст ошибки, состояние попапа(t/f)
     const {dishes,isLoading,error} = useAppSelector(state => state.dishReducer)
   
-    
-    //Диструктуризация екшенов
-    const dispatch = useAppDispatch();
     
     //Стейты  и переменный для пагинации 
     const [currentPage,setCurrentPage] = useState<number>(1);
@@ -58,11 +54,6 @@ export const Home: React.FC = ()=>{
 
   // Отображения текущ кол блюд на стр.
   const currentDish = activeDishes.slice(firstDishIndex, lastDishIndex)
-
-  //Получаем блюда при первом рендеренге
-  useEffect(()=>{
-     dispatch(fetchDishes())
-  },[])
 
     return (
         <>
