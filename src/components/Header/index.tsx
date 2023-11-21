@@ -37,7 +37,7 @@ const Header: React.FC = () => {
          <ul>
             <li><b>{totalprice} ₴</b></li>
             <li><div></div></li>
-            <li onClick={()=> navigate('/ReactSushiPizza/cart')}><img src="/ReactSushiPizza/imgs/dishes/pizza/pizza2.webp" alt="CartImg" /><b style={{marginLeft: 6, marginTop: 2}}>{count || ''}</b></li>
+            <li onClick={()=> navigate('/ReactSushiPizza/cart')}><img src="/ReactSushiPizza/imgs/UI/cart.svg" alt="CartImg" /><b style={{marginLeft: 6, marginTop: 2}}>{count || ''}</b></li>
          </ul>
       </div>
     </header>
