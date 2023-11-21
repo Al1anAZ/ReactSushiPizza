@@ -18,7 +18,7 @@ const MyPopup: React.FC<PopUpProps> = ({handle,sort}) =>{
   return (
     <div className={classes.Sort} tabIndex={0} onBlur={()=>setPopupvisible(false)} ref={popupRef}>
              <div>
-                <img src="/imgs/UI/popup.svg" alt="popupimg" className={popupvisible ? classes.rotate : ''} onClick={(e: React.MouseEvent<HTMLImageElement, MouseEvent>)=> {
+                <img src="/ReactSushiPizza/imgs/UI/popup.svg" alt="popupimg" className={popupvisible ? classes.rotate : ''} onClick={(e: React.MouseEvent<HTMLImageElement, MouseEvent>)=> {
                     e.stopPropagation();
                       setPopupvisible(!popupvisible)}}/>
                 <b>Сорутвати за:</b>

@@ -125,7 +125,7 @@ export default function Order() {
        :
        orderStatus.status === "pending" ? 
        <div className={classes.StatusPages}>
-         <img src="/imgs/UI/Loading.svg" alt="loading" width={300} height={300}/>
+         <img src="/ReactSushiPizza/imgs/UI/Loading.svg" alt="loading" width={300} height={300}/>
        </div>
        :
        orderStatus.status === "done" ? 

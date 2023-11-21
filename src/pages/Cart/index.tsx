@@ -28,7 +28,7 @@ const DishInCart : React.FC<DishInCartProps> = ({dish}) =>{
                <MyButton handler={()=>dispatch(changeAmmount({action: "+", dish: dish}))}><b>+</b></MyButton>
            </div>
            <b style={{display: "flex",justifyContent: "center",alignItems: "center", fontSize: 22}}>{dish.dish.price * dish.dish.count} ₴</b>
-           <img style={{cursor: "pointer"}} src="/imgs/UI/removebtn.svg" alt="removebtn" onClick={()=> dispatch(deletefromCart(dish))}/>
+           <img style={{cursor: "pointer"}} src="/ReactSushiPizza/imgs/UI/removebtn.svg" alt="removebtn" onClick={()=> dispatch(deletefromCart(dish))}/>
      </div>
    )
 }
@@ -45,8 +45,8 @@ export const Cart: React.FC = ()=>{
             {dishes.length ? 
             <>
              <div className={classes.CartTop}>
-                <span><img src="/imgs/UI/CartIconv2.svg" alt="CartIconv2" width={29} height={29}/><b>Кошик</b></span>
-                <span onClick={()=>dispatch(clearCart())}><img src="/imgs/UI/clearCart.svg" alt="clearCart" />Очистити кошик</span>
+                <span><img src="/ReactSushiPizza/imgs/UI/CartIconv2.svg" alt="CartIconv2" width={29} height={29}/><b>Кошик</b></span>
+                <span onClick={()=>dispatch(clearCart())}><img src="/ReactSushiPizza/imgs/UI/clearCart.svg" alt="clearCart" />Очистити кошик</span>
                 </div>
             <div className={classes.CartDishes}>
                 {dishes.map(dish => <DishInCart dish={dish}/>)}
@@ -65,7 +65,7 @@ export const Cart: React.FC = ()=>{
             <h2>Кошик пустий &#128546;</h2>
             <p>Найімовірніше, ви ще не замовляли страву. <br />
            Щоб замовити страву, перейди на головну сторінку.</p>
-           <img src="/imgs/UI/cartempty.svg" alt="cartempty" />
+           <img src="/ReactSushiPizza/imgs/UI/cartempty.svg" alt="cartempty" />
            <br />
            <br />
            <MyButton handler={()=>navigator("/ReactSushiPizza/")} inlinestyle={ButtonStyle}><b>Повернутися</b></MyButton>

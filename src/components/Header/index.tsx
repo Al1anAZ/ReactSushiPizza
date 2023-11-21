@@ -19,7 +19,7 @@ const Header: React.FC = () => {
   return (
     <header className={classes.Header}>
       <div className={classes.Left} onClick={()=>{navigate('/ReactSushiPizza'); setInput('')}}>
-        <img src="/imgs/Logo.svg" alt="logo" width={50} height={50}/>
+        <img src="/ReactSushiPizza/imgs/Logo.svg" alt="logo" width={50} height={50}/>
          <span>
            <h2>React TS Sushi Pizza</h2>
            <b>Best Sushi and Pizza in the universe</b>
@@ -29,7 +29,7 @@ const Header: React.FC = () => {
            <div style={{position: "relative"}}>
            <input type="text" className={classes.MyInput} placeholder="Я шукаю...." onChange={handleInput} value={input}/>
             <button className={classes.ButtonClear} disabled={!Boolean(input)} onClick={()=> setInput('')}>
-                <img src="/imgs/UI/clearbutton.webp" alt="clear button" width={24} height={24}/></button>
+                <img src="/ReactSushiPizza/imgs/UI/clearbutton.webp" alt="clear button" width={24} height={24}/></button>
            </div>
             <MyButton disabled={!Boolean(input)} handler={handleSearch} inlinestyle={ButtonSearch}><b>Пошук</b></MyButton>
     </div>
@@ -37,7 +37,7 @@ const Header: React.FC = () => {
          <ul>
             <li><b>{totalprice} ₴</b></li>
             <li><div></div></li>
-            <li onClick={()=> navigate('/ReactSushiPizza/cart')}><img src="/imgs/UI/cart.svg" alt="CartImg" /><b style={{marginLeft: 6, marginTop: 2}}>{count || ''}</b></li>
+            <li onClick={()=> navigate('/ReactSushiPizza/cart')}><img src="/ReactSushiPizza/imgs/UI/cart.svg" alt="CartImg" /><b style={{marginLeft: 6, marginTop: 2}}>{count || ''}</b></li>
          </ul>
       </div>
     </header>
