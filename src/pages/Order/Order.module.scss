@@ -4,6 +4,7 @@
     min-height: 60vh;
     max-width: 500px;
     margin: auto;
+    d
     >h2{
         text-align: center;
     }
@@ -31,6 +32,8 @@
     margin-top: 30px;
     min-height: 300px;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     >form{
         display: flex;
         flex-direction: column;
@@ -108,4 +111,41 @@
           }
     }
 
+}
+.StatusPages{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height:  60vh;
+}
+@media #{$mq-phone} {
+    .FormAndOrderDishes{
+       >form{
+         margin-bottom: 40px;
+         >input{
+            margin-bottom: 20px;
+         }
+       }
+    }
+    .OrderBody{
+        >h2{
+            text-align: center;
+        }
+        padding: {
+            right: 20px;
+            left: 20px;
+        };
+    }
+    .OrderButtons{
+        >button{
+            width: 150px !important;
+        }
+        margin-bottom: 50px;
+    }
+    .StatusPages{
+        h2{
+           text-align: center;
+        }
+    }
 }

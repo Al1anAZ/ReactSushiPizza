@@ -31,7 +31,9 @@ export default function Order() {
     const {dishes,totalprice} = useAppSelector(state=> state.cartReducer)
     const dispatch = useAppDispatch();
     const {clearCart} = cartSlice.actions;
+    //Стейт для валидации инпута
     const [validInputs, setValidInputs] = useState<valid>({name: 'valid', phone: 'valid', email: 'valid', address: 'valid'})
+    //Стейт для отслеживания статуса отправки на бэк заказа
     const [orderStatus, setOrderStatus] = useState<OrderStatus>({status: "inactive", orderId: 0})
     const [order, setOrder]  = useState<Order>(
         {id: null,
@@ -42,7 +44,7 @@ export default function Order() {
          email: "", 
          address: ""})
     if(!dishes.length && orderStatus.status === 'inactive')
-       return  <Navigate to={"/"}/>
+       return  <Navigate to={"/ReactSushiPizza/"}/>
   return (
     <>
      {orderStatus.status === "inactive" ?
@@ -102,11 +104,10 @@ export default function Order() {
            <div>
             {dishes.map(item => <><br /><hr /><b>{item.dish.name}:</b> <br/><p>{item.dish.pizzaProps?.dough === 'thin' ? 'тонке тісто' : item.dish.pizzaProps?.dough === 'trad' ? 'традиційне тісто,': null} {item.dish.pizzaProps?.size ? `${item.dish.pizzaProps?.size} см.`: null} {item.dish.count} шт.</p></>)}
            </div>
-          
         </div>
         </div>
         <div className={classes.OrderButtons}>
-           <MyButton handler={()=>navigator('/cart')} inlinestyle={ButtonStyle}> <b>Повернутися</b></MyButton>
+           <MyButton handler={()=>navigator('/ReactSushiPizza/cart')} inlinestyle={ButtonStyle}> <b>Повернутися</b></MyButton>
            <MyButton handler={async()=>{
              try{
                 setOrderStatus({...orderStatus,status: "pending"})
@@ -123,20 +124,20 @@ export default function Order() {
        </div>
        :
        orderStatus.status === "pending" ? 
-       <div style={{minHeight: '60vh', display: "flex", justifyContent: 'center', alignItems: "center"}}>
+       <div className={classes.StatusPages}>
          <img src="/imgs/UI/Loading.svg" alt="loading" width={300} height={300}/>
        </div>
        :
        orderStatus.status === "done" ? 
-       <div  style={{minHeight: '60vh', display: "flex", justifyContent: 'center', alignItems: "center", flexDirection: "column"}}>
+       <div  className={classes.StatusPages}>
              <h2 style={{marginBottom: 100}}>Ваше замовлення №<span style={{color: "rgba(0, 82, 204, 0.767) "}}>{orderStatus.orderId}</span> успішно оформлене &#129395;</h2>
-             <MyButton handler={()=>navigator('/')} inlinestyle={ButtonStyle}> <b>На головну</b></MyButton>
+             <MyButton handler={()=>navigator('/ReactSushiPizza/')} inlinestyle={ButtonStyle}> <b>На головну</b></MyButton>
        </div> 
        :
        orderStatus.status === "error" ?
-       <div  style={{minHeight: '60vh', display: "flex", justifyContent: 'center', alignItems: "center", flexDirection: "column"}}>
+       <div className={classes.StatusPages}>
              <h2 style={{marginBottom: 100}}>Не вдалось оформити замовлення &#128546;</h2>
-             <MyButton handler={()=>navigator('/')} inlinestyle={ButtonStyle}> <b>На головну</b></MyButton>
+             <MyButton handler={()=>navigator('/ReactSushiPizza/')} inlinestyle={ButtonStyle}> <b>На головну</b></MyButton>
        </div> 
        : 
        null

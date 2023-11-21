@@ -30,10 +30,10 @@ function App() {
       <div className="Body">
         <Header/>
           <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/search/:codeddishes" element={<Search/>}/>
-            <Route path="/cart" element={<Cart/>}/>
-            <Route path="/cart/order" element={<Order/>}/>
+            <Route path="/ReactSushiPizza" element={<Home/>}/>
+            <Route path="/ReactSushiPizza/search/:codeddishes" element={<Search/>}/>
+            <Route path="/ReactSushiPizza/cart" element={<Cart/>}/>
+            <Route path="/ReactSushiPizza/cart/order" element={<Order/>}/>
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer/>

@@ -99,6 +99,7 @@
    justify-content: center;
    align-items: center;
    border-radius: 10px;
+   transition: all 0.2s;
    border: none;
    &:hover{
      background-color: rgba($color: #e4e0e0, $alpha: 1.0);
@@ -116,4 +117,46 @@
         background-color: transparent;
       }
    }
+}
+
+@media #{$mq-phone}{
+    .Left{
+        margin: auto;
+    }
+    .Header{
+      flex-wrap: wrap;
+      align-items: baseline;
+    }
+  
+    .MyInput{
+        width: 100%;
+    }
+    .MyInputBox{
+        width: 180px;
+        margin: {
+            top: 40px;
+            bottom: 20px;
+        };
+    }
+}
+@media #{$mq-tablet} {
+    .Left{
+        h2{
+            font-size: 18px;
+        }
+        font-size: 14px;
+    }
+    .Right{
+        b{
+            font-size: 13px;
+        }
+    }
+    .MyInputBox{
+        margin: {
+            right: 10px;
+        };
+    }
+    .MyInput{
+        width: 100%;
+    }
 }

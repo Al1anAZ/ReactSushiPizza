@@ -56,8 +56,8 @@ export const Cart: React.FC = ()=>{
                 <span>Сума замовлення: <b>{totalprice} ₴</b></span>
             </div>
             <div className={classes.CartButtons}>
-                 <MyButton handler={()=>navigator("/")} inlinestyle={ButtonStyle}><b>Повернутися</b></MyButton>
-                 <MyButton handler={()=>navigator("/cart/order")} inlinestyle={ButtonStyle}> <b>Замовити</b></MyButton>
+                 <MyButton handler={()=>navigator("/ReactSushiPizza/")} inlinestyle={ButtonStyle}><b>Повернутися</b></MyButton>
+                 <MyButton handler={()=>navigator("/ReactSushiPizza/cart/order")} inlinestyle={ButtonStyle}> <b>Замовити</b></MyButton>
             </div>
             </>
             :
@@ -68,7 +68,7 @@ export const Cart: React.FC = ()=>{
            <img src="/imgs/UI/cartempty.svg" alt="cartempty" />
            <br />
            <br />
-           <MyButton handler={()=>navigator("/")} inlinestyle={ButtonStyle}><b>Повернутися</b></MyButton>
+           <MyButton handler={()=>navigator("/ReactSushiPizza/")} inlinestyle={ButtonStyle}><b>Повернутися</b></MyButton>
            </div>   
         }
         </div>

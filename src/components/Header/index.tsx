@@ -11,14 +11,14 @@ const Header: React.FC = () => {
   const [input, setInput] = useState<string>('')
   function handleSearch(){
     const serializedSearchQuerry = encodeURIComponent(JSON.stringify(input));
-    navigate(`search/${serializedSearchQuerry}`)
+    navigate(`/ReactSushiPizza/search/${serializedSearchQuerry}`)
  }
  function handleInput(e : ChangeEvent<HTMLInputElement>){
   setInput(e.target.value)
 }
   return (
     <header className={classes.Header}>
-      <div className={classes.Left} onClick={()=>{navigate('/'); setInput('')}}>
+      <div className={classes.Left} onClick={()=>{navigate('/ReactSushiPizza'); setInput('')}}>
         <img src="/imgs/Logo.svg" alt="logo" width={50} height={50}/>
          <span>
            <h2>React TS Sushi Pizza</h2>
@@ -37,7 +37,7 @@ const Header: React.FC = () => {
          <ul>
             <li><b>{totalprice} ₴</b></li>
             <li><div></div></li>
-            <li onClick={()=> navigate('/cart')}><img src="/imgs/UI/cart.svg" alt="CartImg" /><b style={{marginLeft: 6, marginTop: 2}}>{count || ''}</b></li>
+            <li onClick={()=> navigate('/ReactSushiPizza/cart')}><img src="/imgs/UI/cart.svg" alt="CartImg" /><b style={{marginLeft: 6, marginTop: 2}}>{count || ''}</b></li>
          </ul>
       </div>
     </header>

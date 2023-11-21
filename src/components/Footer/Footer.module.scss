@@ -7,6 +7,9 @@
     padding-top: 20px;
 }
 .LeftFooter{
+    display: flex;
+    justify-content: center;
+    align-items: last baseline;
     >b{
         margin-left: 10px;
         >span{
@@ -29,4 +32,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+@media #{$mq-phone}{
+    .FooterBody{
+        flex-direction: column;
+    }
+    .LeftFooter{
+        >b{
+            width: 210px;
+        }
+    }
 }

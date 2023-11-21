@@ -35,3 +35,23 @@
    }
    
 }
+@media #{$mq-phone} {
+   .Pagination{
+   >li{
+    &:active{
+        background-color:$MainColorDark;
+        transform: translate(0,-3px);
+    }
+   }
+   }
+}
+@media #{$mq-tablet} {
+    .Pagination{
+       >li{
+        &:active{
+            background-color:$MainColorDark;
+            transform: translate(0,-3px);
+        }
+       }
+    }
+}

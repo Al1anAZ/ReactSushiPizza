@@ -8,6 +8,7 @@
 .Categories{
     list-style:  none;
     display: flex;
+    flex-wrap: wrap;
     >li{
         cursor: pointer;
         background-color: $LightGrey;
@@ -30,4 +31,22 @@
 }
 .textblue{
     color: $MainColor;
+}
+@media #{$mq-phone}{
+    .Categories{
+        margin-bottom: 40px;
+        >li{
+            margin-right: 5px;
+        }
+    }
+    .CategoriesAndSordBar{
+        flex-direction: column;
+    }
+}
+@media #{$mq-tablet} {
+ .Categories{
+        >li{
+            padding: 10px;
+        }
+ }
 }

@@ -48,6 +48,7 @@
 .CartBottom{
     margin-top: 15px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     font-size: 22px;
     b{
@@ -118,4 +119,64 @@
         color: $Grey;
         margin-bottom: 45px;
     }
+}
+@media #{$mq-phone}{
+    .CartBox{
+        padding: {
+            left: 10px;
+            right: 10px;
+        };
+    }
+    .ChangeAmmount{
+        width: 70px;
+        >button{
+            width: 23px;
+            height: 23px;
+        }
+    }
+    .CartButtons{
+        >button{
+            width: 150px !important;
+        }
+    }
+    .RightSide{
+        h3{
+            font-size: 14px;
+            max-width: 100px;
+        }
+        p{
+            font-size: 13px;
+            max-width: 70px;
+        }
+        >img{
+            width: 70px;
+            height: 70px;
+        }
+    }
+    .dishInCard{
+        align-items: center;
+        b{
+            font-size: 16px !important;
+        }
+        >img{
+            
+            width: 20px;
+            height: 20px;
+        }
+    }
+    .CartBottom{
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .CartTop{
+        span:first-child{
+            font-size: 26px;
+           >img{
+            width: 20px;
+            height: 20px;
+           }
+         }
+    }
+            
+
 }

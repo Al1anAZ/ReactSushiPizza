@@ -23,3 +23,46 @@
         }
     }
 }
+@media #{$mq-phone} {
+    .Button{
+        &:hover{
+            background-color:$MainColorLight !important;
+        }
+        &:active{
+            transform: translate(0,-3px);
+            background-color: $MainColorLight !important;
+        }
+        &:disabled{
+            cursor: default;
+            background-color:$MainColorLight;
+            &:hover{
+                background-color:$MainColorLight;
+            }
+            &:active{
+                background-color:$MainColorLight !important;
+            }
+        }
+    }
+}
+@media #{$mq-tablet} {
+    .Button{
+        &:hover{
+            background-color:$MainColorLight !important;
+        }
+        &:active{
+            transform: translate(0,-3px);
+            background-color: $MainColorLight !important;
+        }
+        &:disabled{
+            cursor: default;
+            background-color:$MainColorLight;
+            &:hover{
+                background-color:$MainColorLight;
+            }
+            &:active{
+                transform: translate(0,0);
+                background-color:$MainColorLight !important;
+            }
+        }
+    }
+}
