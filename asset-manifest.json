@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/ReactSushiPizza/static/css/main.63ec1020.css",
-    "main.js": "/ReactSushiPizza/static/js/main.9a610e78.js",
+    "main.js": "/ReactSushiPizza/static/js/main.43fcda57.js",
     "index.html": "/ReactSushiPizza/index.html",
     "main.63ec1020.css.map": "/ReactSushiPizza/static/css/main.63ec1020.css.map",
-    "main.9a610e78.js.map": "/ReactSushiPizza/static/js/main.9a610e78.js.map"
+    "main.43fcda57.js.map": "/ReactSushiPizza/static/js/main.43fcda57.js.map"
   },
   "entrypoints": [
     "static/css/main.63ec1020.css",
-    "static/js/main.9a610e78.js"
+    "static/js/main.43fcda57.js"
   ]
 }
